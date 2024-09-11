@@ -1,5 +1,5 @@
 def ferry_loading(ferry_length, cars):
-    ferry_length *= 1000  # Convertimos la longitud del ferry a centímetros
+    ferry_length *= 100  # Convertimos la longitud del ferry a centímetros
     n = len(cars)  # Número de coches
     
     # DP: Usamos un diccionario en lugar de una lista para hacer la búsqueda más eficiente
