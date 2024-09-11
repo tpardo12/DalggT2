@@ -2,7 +2,7 @@ import sys
 
 def ferry2(ferry_length, cars):
     ferry_length = ferry_length * 100
-    inicio = {0: [(ferry_length, ferry_length, -1)]}
+    inicio = {0: [(ferry_length, ferry_length, -1)]} #diccionario para almacenar los movimientos de los coches y loas espacios disponibles
     for car in range(len(cars)):
         lista = []
         for AB in inicio[car]:
@@ -23,7 +23,7 @@ def ferry2(ferry_length, cars):
         else:
             num = len(inicio) - 1
             return num, inicio[num][0][2]
-    return 0, ''  # Default return in case no valid arrangement is found
+    return 0, ''  # Si no se puede cargar ningún coche, devolvemos 0 y una cadena vacía
 
 def read_input(source):
     # Función para leer la entrada, ya sea desde un archivo o desde la consola
@@ -85,3 +85,26 @@ if __name__ == "__main__":
         output_file = sys.argv[2]
     
     main(input_file, output_file)
+
+    """
+1. Solución:
+   - La solución utiliza la técnica de **Bottom-Up (BU)**, ya que construimos las soluciones parciales 
+     comenzando desde el primer coche, revisando las posibles combinaciones para cargar los coches.
+     
+2. Complejidad espacial y temporal:
+   - Complejidad Temporal: O(n * L) donde `n` es el número de coches y `L` es la longitud del ferry en centímetros. 
+     Por cada coche, calculamos las combinaciones de espacio restante para los dos lados (port y starboard).
+   - Complejidad Espacial: O(n * L) ya que utilizamos un diccionario para almacenar las combinaciones de espacio 
+     restante en cada paso.
+   
+   Explicación breve: El tiempo depende de cuántos coches hay y cuántas combinaciones de espacio restante en el ferry 
+   evaluamos, que está ligado a la longitud del ferry y al número de coches.
+
+3. Estrategia y uso de memoización:
+   - Estrategia: La estrategia sigue un enfoque de **Programación Dinámica (Dynamic Programming)**. Vamos evaluando las 
+     combinaciones de espacio disponible en ambos lados del ferry (port y starboard), coche por coche, y decidimos dónde 
+     cargar cada coche para maximizar el número de coches cargados.
+   - Uso de memoización: Usamos memoización al almacenar las combinaciones de espacio restante en el ferry (port y starboard)
+     en el diccionario `inicio`. Esto evita recalcular combinaciones para coches previos y mejora la eficiencia al reducir el 
+     número de combinaciones que necesitamos revisar en cada paso.
+"""
