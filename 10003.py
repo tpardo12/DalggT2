@@ -25,6 +25,7 @@ def costoMin(n, cuts):
     return dp[0][m - 1]
 
 if __name__ == "__main__":
+    results = []  # Lista para almacenar los resultados
     while True:
         l = int(input())  # Longitud del palo
         if l == 0:  # Caso de finalización
@@ -32,7 +33,13 @@ if __name__ == "__main__":
         n = int(input())  # Número de cortes
         cuts = list(map(int, input().split()))  # Posiciones de los cortes
         result = costoMin(l, cuts)
-        print(f"El costo minimo es de {result}.")
+        results.append(f"The minimun cutting is {result}.")  # Agregar resultado a la lista
+
+    # Imprimir todos los resultados al final
+    print("\nOutput:")
+    for res in results:
+        
+        print(res)
 
 
 """
