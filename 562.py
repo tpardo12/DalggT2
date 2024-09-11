@@ -1,3 +1,4 @@
+import argparse
 def division_monedas(lista_monedas):
     """
     Esta función toma como parámetros una lista de monedas para cada ejercicio (lista_monedas).
@@ -35,34 +36,69 @@ def division_monedas(lista_monedas):
 
     return resultados
 
-# Función principal que usa entrada estándar (stdin) y salida estándar (stdout)
-def main():
-    # Leer la cantidad de problemas (n) de la primera línea
-    n = int(input().strip())
-
+def leer_desde_consola():
+    """
+    Lee la entrada desde la consola para obtener los datos de los ejercicios.
+    """
+    n = int(input().strip())  # Leer el número de ejercicios
     lista_monedas = []
 
-    # Leer los problemas
     for _ in range(n):
-        m = int(input().strip())  # Leer la cantidad de monedas en este ejercicio
-        monedas = list(map(int, input().strip().split()))  # Leer las monedas
-        if len(monedas) != m:
-            print(f"Error: La cantidad de monedas no coincide con el número dado.")
-            return
-        lista_monedas.append(monedas)
+        m = int(input().strip())  # Leer el número de monedas
+        monedas = list(map(int, input().strip().split()))  # Leer monedas para cada ejercicio
+        lista_monedas.append(monedas)  # Añadir la lista de monedas para cada ejercicio
 
-    # Llamar a la función division_monedas
+    return lista_monedas  # Retornar una lista de listas de monedas
+
+def leer_desde_archivo(archivo_entrada):
+    """
+    Lee la entrada desde un archivo de texto para obtener los datos de los ejercicios.
+    """
+    lista_monedas = []
+    with open(archivo_entrada, 'r') as f:
+        n = int(f.readline().strip())  # Leer el número de ejercicios
+        for _ in range(n):
+            m = int(f.readline().strip())  # Leer el número de monedas para el ejercicio actual
+            monedas = list(map(int, f.readline().strip().split()))  # Leer las monedas para el ejercicio actual
+            lista_monedas.append(monedas)  # Añadir la lista de monedas
+
+    return lista_monedas
+
+def escribir_resultado_a_archivo(archivo_salida, resultados):
+    """
+    Escribe los resultados en un archivo de salida.
+    """
+    with open(archivo_salida, 'a') as f:
+        for resultado in resultados:
+            f.write(f"{resultado}\n")
+
+def main():
+    parser = argparse.ArgumentParser(description="Programa que resuelve el problema de división de monedas.")
+    parser.add_argument('--input', type=str, help="Archivo de entrada (opcional). Si no se proporciona, se usará la entrada por consola.")
+    parser.add_argument('--output', type=str, help="Archivo de salida (opcional). Si no se proporciona, se usará la salida por consola.")
+
+    args = parser.parse_args()
+
+    # Leer los datos desde archivo o consola
+    if args.input:
+        lista_monedas = leer_desde_archivo(args.input)
+    else:
+        lista_monedas = leer_desde_consola()
+
+    # Procesar los datos
     resultados = division_monedas(lista_monedas)
-    print("Resultado: ")
-    # Imprimir los resultados en salida estándar
-    for resultado in resultados:
-        
-        print(resultado)
+
+    # Escribir los resultados en archivo o consola
+    if args.output:
+        escribir_resultado_a_archivo(args.output, resultados)
+    else:
+        print("Resultados:")
+        for resultado in resultados:
+            print(resultado)
 
 # Ejecutar el programa
 if __name__ == "__main__":
     main()
-
 
 
 

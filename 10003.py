@@ -1,3 +1,4 @@
+import sys
 def costoMin(n, cuts):
     # Ordenamos los cortes y agregamos los límites del palo (0 y n)
     cuts.sort()
@@ -24,23 +25,55 @@ def costoMin(n, cuts):
     # El resultado final estará en dp[0][m-1], que es el costo mínimo para todo el palo
     return dp[0][m - 1]
 
+def read_input(source):
+    # Función para leer la entrada, ya sea desde un archivo o desde la consola
+    if source:
+        return open(source, 'r')
+    else:
+        return sys.stdin  # Lee desde la consola
+
+def write_output(destination):
+    # Función para escribir la salida, ya sea en archivo o en la consola
+    if destination:
+        return open(destination, 'a')  # Modo 'append' para no sobrescribir
+    else:
+        return sys.stdout  # Escribe en la consola
+
+def main(input_file=None, output_file=None):
+    # Abrir los archivos de entrada/salida (si se proporcionan)
+    with read_input(input_file) as infile:
+        outfile = write_output(output_file)
+
+        while True:
+            l = int(infile.readline().strip())  # Leer longitud del palo
+            if l == 0:  # Caso de finalización
+                break
+            n = int(infile.readline().strip())  # Leer número de cortes
+            cuts = list(map(int, infile.readline().strip().split()))  # Leer posiciones de los cortes
+            result = costoMin(l, cuts)
+
+            # Escribir el resultado inmediatamente
+            outfile.write(f"The minimum cutting is {result}.\n")
+            
+            # Asegurarse de que los resultados se impriman de inmediato si es en consola
+            if outfile == sys.stdout:
+                sys.stdout.flush()
+
+        # Cerrar el archivo de salida si fue un archivo
+        if output_file:
+            outfile.close()
+
+# Punto de entrada principal del programa
 if __name__ == "__main__":
-    results = []  # Lista para almacenar los resultados
-    while True:
-        l = int(input())  # Longitud del palo
-        if l == 0:  # Caso de finalización
-            break
-        n = int(input())  # Número de cortes
-        cuts = list(map(int, input().split()))  # Posiciones de los cortes
-        result = costoMin(l, cuts)
-        results.append(f"The minimun cutting is {result}.")  # Agregar resultado a la lista
-
-    # Imprimir todos los resultados al final
-    print("\nOutput:")
-    for res in results:
-        
-        print(res)
-
+    input_file = None
+    output_file = None
+    
+    # Si el usuario pasa argumentos desde la línea de comandos, los utilizamos
+    if len(sys.argv) == 3:
+        input_file = sys.argv[1]
+        output_file = sys.argv[2]
+    
+    main(input_file, output_file)
 
 """
 Explicación del enfoque:

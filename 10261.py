@@ -35,17 +35,19 @@ def read_input(source):
 def write_output(destination):
     # Función para escribir la salida, ya sea en archivo o en la consola
     if destination:
-        return open(destination, 'w')
+        return open(destination, 'a')  # Modo 'a' para escribir sin sobreescribir el contenido
     else:
         return sys.stdout  # Escribe en la consola
 
 def main(input_file=None, output_file=None):
     # Abrir los archivos de entrada/salida (si se proporcionan)
-    with read_input(input_file) as infile, write_output(output_file) as outfile:
+    with read_input(input_file) as infile:
+        outfile = write_output(output_file)  # Mantener outfile abierto todo el tiempo en modo 'a'
+
         # Leer el número de casos
         T = int(infile.readline().strip())  # Número de casos de prueba
         infile.readline().strip()  # Leer la línea en blanco después del número de casos
-        
+
         # Iterar sobre cada caso de prueba
         for _ in range(T):
             ferry_length = int(infile.readline().strip())  # Leer la longitud del ferry en metros
@@ -56,22 +58,30 @@ def main(input_file=None, output_file=None):
                 if car_length == 0:  # Si la longitud es 0, terminamos de leer
                     break
                 cars.append(car_length)  # Añadimos el coche a la lista
-            
+
             # Llamamos a la función para calcular el máximo de coches que pueden entrar
             total_cars, arrangement = ferry2(ferry_length, cars)
-            
-            # Escribir el número de coches cargados en el archivo de salida
+
+            # Escribir el número de coches cargados inmediatamente
             outfile.write(f"{total_cars}\n")
             
-            # Escribir la disposición de cada coche (port o starboard) en el archivo de salida
+            # Escribir la disposición de cada coche (port o starboard)
             for side in arrangement:
                 if side == '0':
                     outfile.write("port\n")  # Si el coche va en el lado izquierdo (port)
                 else:
                     outfile.write("starboard\n")  # Si el coche va en el lado derecho (starboard)
-            
+
             # Escribir una línea en blanco entre casos
             outfile.write("\n")
+            
+            # Si es sys.stdout, asegurarse de que se vacíe el buffer y se imprima de inmediato
+            if outfile == sys.stdout:
+                sys.stdout.flush()
+
+        # Cerrar el archivo de salida si fue un archivo
+        if output_file:
+            outfile.close()
 
 # Punto de entrada principal del programa
 if __name__ == "__main__":
@@ -92,13 +102,15 @@ if __name__ == "__main__":
      comenzando desde el primer coche, revisando las posibles combinaciones para cargar los coches.
      
 2. Complejidad espacial y temporal:
-   - Complejidad Temporal: O(n * L) donde `n` es el número de coches y `L` es la longitud del ferry en centímetros. 
-     Por cada coche, calculamos las combinaciones de espacio restante para los dos lados (port y starboard).
-   - Complejidad Espacial: O(n * L) ya que utilizamos un diccionario para almacenar las combinaciones de espacio 
-     restante en cada paso.
-   
-   Explicación breve: El tiempo depende de cuántos coches hay y cuántas combinaciones de espacio restante en el ferry 
-   evaluamos, que está ligado a la longitud del ferry y al número de coches.
+    Complejidad Temporal: O(n * 2^n), donde 'n' es el número de coches.
+    Para cada coche, se calculan todas las combinaciones posibles de colocación en los lados izquierdo (port) 
+    y derecho (starboard) del ferry. Esto genera un número exponencial de combinaciones, lo que lleva a una 
+    complejidad temporal exponencial en el peor de los casos.
+
+    Complejidad Espacial: O(2^n), ya que utilizamos un diccionario para almacenar todas las combinaciones de 
+    espacio restante en ambos lados del ferry para cada coche. Como el número de combinaciones puede crecer 
+    exponencialmente con el número de coches, la memoria utilizada es también exponencial.
+    
 
 3. Estrategia y uso de memoización:
    - Estrategia: La estrategia sigue un enfoque de **Programación Dinámica (Dynamic Programming)**. Vamos evaluando las 
