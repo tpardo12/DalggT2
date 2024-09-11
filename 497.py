@@ -25,4 +25,34 @@ def LIS (misiles):
     return(destruidos, len(destruidos))
 
 
-print(LIS([2,100,3,101,4,5,6,7]))
+
+
+def main():
+    misiles = list(map(int, input("ingresa los misiles: ").strip().split()))
+    m = LIS(misiles)
+    
+    print(f"Misiles destruidos = {m[1]}")
+    print(f"Misiles  = {m[0]}")
+    return None
+
+
+if __name__ == "__main__":
+    main()
+"""
+# -- Sección de Explicación --
+# – Su solución es BU o TP:
+#   Esta solución es una **solución de arriba hacia abajo(Top-down, TP)**. 
+#   Usa el recurso de memorizacion,alamcenando en arrglos las soluciones pasadas, para llegar a la final 
+
+
+# – Complejidad espacial y temporal:
+#   - Complejidad temporal: **O(n^2 )**, donde `n` es el número de misiles 
+#
+#   - Complejidad espacial: **O( n  )**. La memoria usada para almacenar el resultado de LIS
+
+# – Estrategia de la solución:
+     Se utilizo el algoritmo LIS para encontrar la subsecuencia mas larga necesaria para determinar que misiles se destruiran
+# – Uso de Memoización:
+#   la solucion reserva un arreglo principal donde se agregan las subsecuencias de los misilies que posterior mente se seleccionara la mas larga para indicar el resultado
+
+"""

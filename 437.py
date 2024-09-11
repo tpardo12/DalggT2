@@ -1,36 +1,51 @@
 from itertools import permutations, count
 
 
-def LIS(blocks: list):
-    dp = [0] * len(blocks) 
-    for i, block in enumerate(blocks):
-        dp[i] = block[-1]
+def LIS(bloques: list):
+    dp = [0] * len(bloques) 
+    for i, bloque in enumerate(bloques):
+        dp[i] = bloque[-1]
         for j in range(i):
-          #  print(j)
-           # print(blocks[j]) 
-            if (
-                
-                block[0] > blocks[j][0]
-                and 
-                block[1] > blocks[j][1]
-                and 
-                dp[j] + block[-1] > dp[i]
-                
-            ):
-                dp[i] = dp[j] + block[-1]
-  #  print (dp)
+            if (bloque[0] > bloques[j][0] and bloque[1] > bloques[j][1] and dp[j] + bloque[-1] > dp[i]):
+                dp[i] = dp[j] + bloque[-1]
+  
     return max(dp)
 
-
-for case in count(1):
-    blocks = []
-    n = int(input())
-    if n == 0:
-        break
-    for _ in range(n):
-        blocks.extend(permutations(map(int, input().split())))
+def main():
+    for case in count(1):
+        bloques = []
+        n = int(input("ingresa el numero de tipo de bloques : "))
+        if n == 0:
+            break
+        print ("ingresa los bloques: ")
+        for _ in range(n):
+            bloques.extend(permutations(map(int, input().split())))
+        
+        bloques.sort()
     
-    blocks.sort()
-  
-   
-    print(f"Case {case}: maximum height = {LIS(blocks)}")
+    
+        print(f"Caso {case}: altura maxima = {LIS(bloques)}")
+    
+if __name__ == "__main__":
+    main()
+
+    
+"""
+# -- Sección de Explicación --
+# – Su solución es BU o TP:
+#   Esta solución es una **solución de arriba hacia abajo(Top-down, TP)**. 
+#   Usa el recurso de memorizacion,alamcenando en arrglos las soluciones pasadas, para llegar a la final 
+
+
+# – Complejidad espacial y temporal:
+#   - Complejidad temporal: **O(6n^2 )**, donde `n` es el número de tipos de bloques
+#
+#   - Complejidad espacial: **O( 6n  )**. La memoria usada para almacenar el resultado de LIS
+
+# – Estrategia de la solución:
+     Se utilizo el algoritmo LIS para encontrar la subsecuencia mas larga entre los bloques, comparando las bases y sumando a la lista la altura de cada bloque seleccionado
+     de igual forma se utilizo la herramienta permutations dentro de la libreria intertools para realizar las posibles posiciones que puede tomar cada bloque 
+# – Uso de Memoización:
+#   la solucion reserva un arreglo principal donde se agregan las alturas de las subseciencias, destacando a la mas grande
+
+"""

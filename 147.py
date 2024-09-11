@@ -31,14 +31,20 @@ def change(amount, cur):
 
 
 
-def  tocents( amount):
-    amount = amount *100
+def  main( ):
+    a = float(input( "ingresa el valor: "))
+    amount = a *100
     cur = [5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]  
-    return change (int(amount) , cur)
+    print(change (int(amount) , cur))
+    
 
-print(tocents(0.20))
 
 
+
+
+
+if __name__ == "__main__":
+    main()
 
 # -- Sección de Explicación --
 # – Su solución es BU o TP:
@@ -48,7 +54,7 @@ print(tocents(0.20))
 #   Esto contrasta con la estrategia "Top-Down" (TP), que utilizaría recursión con memoización.
 
 # – Complejidad espacial y temporal:
-#   - Complejidad temporal: **O(n * j + j)**, donde `n` es el número de denominaciones, `j` es el monto al que se quiere llegar,
+#   - Complejidad temporal: **O(n * j )**, donde `n` es el número de denominaciones, `j` es el monto al que se quiere llegar,
 #     Cada problema se resuelve procesando cada moneda, teniendo en cuenta un arreglo anterior de procesamientos, para llegar a la combinancion total
 #
 #   - Complejidad espacial: **O(monto * 2 )**. La memoria usada para almacenar los posibles combinaciones que pueden tener las monedas en montos inferiores, y se usa el arreglo pasado y el actual para calcular todo `.

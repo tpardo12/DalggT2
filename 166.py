@@ -84,14 +84,20 @@ def coinsf (limits, amount):
                min = k
            elif k < min:
                min = k
-    print (min)
-            
-# Ejemplo de uso
-amount = 2.70
-limits = [7, 8, 2,7,0,9]
-   
-        
-coinsf(limits, amount)
+    return(min)            
+
+
+
+def  main( ):
+    a = float(input( "ingresa el valor: "))
+    monedas = list(map(int, input("ingresa las monedas: ").strip().split()))
+    print(coinsf (monedas, a))
+    
+
+
+if __name__ == "__main__":
+    main()
+
 
 
 # -- Sección de Explicación --
@@ -106,7 +112,8 @@ coinsf(limits, amount)
 #   - Complejidad espacial: **O( monto maximo posible * 3  )**. La memoria usada para almacenar las posibles combinaciones que pueden tener las monedas en montos maximos, uno para el coin change normal, otro para coin change limiado, y el ultimo para comprar ambas `.
 
 # – Estrategia de la solución:
-#   La estrategia abordada fue hacer dos operaciones principales, el coin cahnge con monedas limitadas que se aplica para los valores multiplos de 5 inferiores al monto maximo posible 
+#   La estrategia abordada fue hacer dos operaciones principales, el coin cahnge con monedas limitadas que se aplica para los valores multiplos de 5 e inferiores al monto maximo posible, otro coinchange que se aplica a cada uno de los valores que se calcularon anteriormente
+#   a modo de simulacion del tendero, y al final sumar cada uno de los intercambios que se llevaron a cabo y retornar el numero minimo de estos.
 #   
 # – Uso de Memoización:
-#   la solucion reserva un arreglo anteriro para realizar los calculos actuales.
+#   la solucion reserva varios arreglos para almacenar el registro de las operaciones anteriornmente mencionadas.
