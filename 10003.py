@@ -76,6 +76,7 @@ if __name__ == "__main__":
     main(input_file, output_file)
 
 """
+#Para correr este archivo en la terminal : python 10003.py input.txt output.txt
 Explicación del enfoque:
 
 – La solución es **Bottom-Up (BU)**. Se construye la solución a partir de subproblemas más pequeños (cortes entre segmentos pequeños) y se expande hasta encontrar el costo mínimo de cortar todo el palo.

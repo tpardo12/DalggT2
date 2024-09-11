@@ -95,8 +95,10 @@ if __name__ == "__main__":
         output_file = sys.argv[2]
     
     main(input_file, output_file)
+#Para correr este archivo en la terminal : python 10261.py input.txt output.txt
 
     """
+
 1. Solución:
    - La solución utiliza la técnica de **Bottom-Up (BU)**, ya que construimos las soluciones parciales 
      comenzando desde el primer coche, revisando las posibles combinaciones para cargar los coches.

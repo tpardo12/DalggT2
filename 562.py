@@ -100,7 +100,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-
+#Para correr este archivo en la terminal : python 562.py --input input.txt --output output.txt
 
 # -- Sección de Explicación --
 # – Su solución es BU o TP:

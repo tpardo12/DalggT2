@@ -92,6 +92,8 @@ if __name__ == "__main__":
     
     main(input_file, output_file)
 
+#Para correr este archivo en la terminal : python 990.py input.txt output.txt
+
 """
     Solución basada en el problema de la mochila (Knapsack Problem) utilizando programación dinámica.
 
