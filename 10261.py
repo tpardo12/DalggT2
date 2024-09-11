@@ -1,79 +1,87 @@
-def ferry_loading(ferry_length, cars):
-    ferry_length *= 100  # Convertimos la longitud del ferry a centímetros
-    n = len(cars)  # Número de coches
-    
-    # DP: Usamos un diccionario en lugar de una lista para hacer la búsqueda más eficiente
-    dp = [{} for _ in range(n + 1)]
-    dp[0][0] = True  # Inicialmente, no hay coches cargados y no se ha usado espacio
-    
-    # Variable para guardar el número máximo de coches cargados y la longitud usada en babor
-    max_cars = 0
-    max_length_babor = 0
-    
-    # Para guardar las decisiones tomadas en cada paso (port o starboard)
-    parent = [{} for _ in range(n + 1)]
-    
-    # Procesar los coches en orden
-    for i in range(n):
-        car_length = cars[i]
-        for length_babor in dp[i]:
-            length_estribor = sum(cars[:i + 1]) - length_babor
-            # Decidir en qué lado cargar el coche, balanceando las longitudes
-            if abs((length_babor + car_length) - length_estribor) < abs(length_babor - (length_estribor + car_length)):
-                # Cargar el coche en babor si esto equilibra mejor la carga
-                if length_babor + car_length <= ferry_length:
-                    dp[i + 1][length_babor + car_length] = True
-                    parent[i + 1][length_babor + car_length] = ('port', length_babor)
+import sys
+
+def ferry2(ferry_length, cars):
+    ferry_length = ferry_length * 100
+    inicio = {0: [(ferry_length, ferry_length, -1)]}
+    for car in range(len(cars)):
+        lista = []
+        for AB in inicio[car]:
+            Ai, Bi, movimientos = AB
+            if (Ai - cars[car]) == (Bi - cars[car]) and (Ai - cars[car] > 0):
+                mov = '0' if movimientos == -1 else movimientos + '0' # cuando ambos casos son iguales, se agrega el coche al lado izquierdo
+                lista.append((Ai - cars[car], Bi, mov))
             else:
-                # Cargar el coche en estribor si esto equilibra mejor la carga
-                if length_estribor + car_length <= ferry_length:
-                    dp[i + 1][length_babor] = True
-                    parent[i + 1][length_babor] = ('starboard', length_babor)
+                if (Ai - cars[car]) >= 0 and ((Ai - cars[car], Bi) not in lista):
+                    mov = movimientos + '0' if movimientos != -1 else '0'# se agrega el coche al lado izquierdo
+                    lista.append((Ai - cars[car], Bi, mov))
+                if (Bi - cars[car]) >= 0 and ((Ai, Bi - cars[car]) not in lista): 
+                    mov = movimientos + '1' if movimientos != -1 else '1' # se agrega el coche al lado derecho
+                    lista.append((Ai, Bi - cars[car], mov))
+
+        if lista:
+            inicio[car + 1] = lista
+        else:
+            num = len(inicio) - 1
+            return num, inicio[num][0][2]
+    return 0, ''  # Default return in case no valid arrangement is found
+
+def read_input(source):
+    # Función para leer la entrada, ya sea desde un archivo o desde la consola
+    if source:
+        return open(source, 'r')
+    else:
+        return sys.stdin  # Lee desde la consola
+
+def write_output(destination):
+    # Función para escribir la salida, ya sea en archivo o en la consola
+    if destination:
+        return open(destination, 'w')
+    else:
+        return sys.stdout  # Escribe en la consola
+
+def main(input_file=None, output_file=None):
+    # Abrir los archivos de entrada/salida (si se proporcionan)
+    with read_input(input_file) as infile, write_output(output_file) as outfile:
+        # Leer el número de casos
+        T = int(infile.readline().strip())  # Número de casos de prueba
+        infile.readline().strip()  # Leer la línea en blanco después del número de casos
         
-        # Actualizamos el número máximo de coches cargados
-        for length_babor in dp[i + 1]:
-            total_length = sum(cars[:i + 1])
-            length_estribor = total_length - length_babor
-            if length_babor <= ferry_length and length_estribor <= ferry_length:
-                max_cars = i + 1
-                max_length_babor = length_babor
+        # Iterar sobre cada caso de prueba
+        for _ in range(T):
+            ferry_length = int(infile.readline().strip())  # Leer la longitud del ferry en metros
+            
+            cars = []  # Lista para almacenar las longitudes de los coches
+            while True:
+                car_length = int(infile.readline().strip())  # Leer la longitud de cada coche
+                if car_length == 0:  # Si la longitud es 0, terminamos de leer
+                    break
+                cars.append(car_length)  # Añadimos el coche a la lista
+            
+            # Llamamos a la función para calcular el máximo de coches que pueden entrar
+            total_cars, arrangement = ferry2(ferry_length, cars)
+            
+            # Escribir el número de coches cargados en el archivo de salida
+            outfile.write(f"{total_cars}\n")
+            
+            # Escribir la disposición de cada coche (port o starboard) en el archivo de salida
+            for side in arrangement:
+                if side == '0':
+                    outfile.write("port\n")  # Si el coche va en el lado izquierdo (port)
+                else:
+                    outfile.write("starboard\n")  # Si el coche va en el lado derecho (starboard)
+            
+            # Escribir una línea en blanco entre casos
+            outfile.write("\n")
 
-    # Reconstruir la solución
-    result = []
-    length_babor = max_length_babor
-    for i in range(max_cars, 0, -1):
-        side, prev_length_babor = parent[i][length_babor]
-        result.append(side)
-        length_babor = prev_length_babor
-    result.reverse()  # Invertimos el resultado para mostrarlo en orden
-
-    return max_cars, result
-
-# Función principal que usa entrada estándar (stdin) y salida estándar (stdout)
-def main():
-    # Leer la cantidad de casos (n)
-    n = int(input().strip())
-    #espacio= input().strip()
-    
-    for _ in range(n):
-
-        ferry_length = int(input().strip())  # Leer la longitud del ferry en metros
-        cars = []
-        while True:
-            car_length = int(input().strip())  # Leer la longitud de cada coche en cm
-            if car_length == 0:
-                break  # La entrada de coches termina con un 0
-            cars.append(car_length)
-        
-        # Llamar a la función ferry_loading
-        max_cars, result = ferry_loading(ferry_length, cars)
-        
-        # Imprimir los resultados en salida estándar
-        print(max_cars)
-        for side in result:
-            print(side)
-
-# Ejecutar el programa
+# Punto de entrada principal del programa
 if __name__ == "__main__":
-    main()
-
+    # Verificamos si se pasan argumentos de entrada y salida
+    input_file = None
+    output_file = None
+    
+    # Si el usuario pasa argumentos desde la línea de comandos, los utilizamos
+    if len(sys.argv) == 3:
+        input_file = sys.argv[1]
+        output_file = sys.argv[2]
+    
+    main(input_file, output_file)
