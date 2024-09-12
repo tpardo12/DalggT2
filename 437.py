@@ -1,4 +1,5 @@
 from itertools import permutations, count
+import sys
 
 
 def LIS(bloques: list):
@@ -11,24 +12,55 @@ def LIS(bloques: list):
   
     return max(dp)
 
-def main():
-    for case in count(1):
-        bloques = []
-        n = int(input("ingresa el numero de tipo de bloques : "))
-        if n == 0:
-            break
-        print ("ingresa los bloques: ")
-        for _ in range(n):
-            bloques.extend(permutations(map(int, input().split())))
-        
-        bloques.sort()
-    
-    
-        print(f"Caso {case}: altura maxima = {LIS(bloques)}")
+def read_input(source):
+    # Función para leer la entrada, ya sea desde un archivo o desde la consola
+    if source:
+        return open(source, 'r')
+    else:
+        return sys.stdin  # Lee desde la consola
+
+def write_output(destination):
+    # Función para escribir la salida, ya sea en archivo o en la consola
+    if destination:
+        return open(destination, 'a')  # Modo 'a' para escribir sin sobreescribir el contenido
+    else:
+        return sys.stdout  # Escribe en la consola
+
+def main(input_file=None, output_file=None):
+    with read_input(input_file) as infile:
+        outfile = write_output(output_file) 
+        for case in count(1):
+            line = infile.readline().strip()
+            bloques = []
+            if not line:
+                break  # Si la línea está vacía, salir del bucle
+            try:
+                T = int(line)
+            except ValueError:
+                break  # Si la conversión falla, salir del bucle
+            for _ in range(T):
+                bloques.extend(permutations(map(int, infile.readline().split())))
+                
+            bloques.sort()
+            outfile.write(f"Caso {case}: altura maxima = {LIS(bloques)}\n")
+                # Si es sys.stdout, asegurarse de que se vacíe el buffer y se imprima de inmediato
+            if outfile == sys.stdout:
+                sys.stdout.flush()
+
+        # Cerrar el archivo de salida si fue un archivo
+        if output_file:
+            outfile.close()
     
 if __name__ == "__main__":
-    main()
-
+    input_file = None
+    output_file = None
+    
+    # Si el usuario pasa argumentos desde la línea de comandos, los utilizamos
+    if len(sys.argv) == 3:
+        input_file = sys.argv[1]
+        output_file = sys.argv[2]
+    
+    main(input_file, output_file)
     
 """
 # -- Sección de Explicación --

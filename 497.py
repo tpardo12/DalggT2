@@ -29,10 +29,8 @@ def LIS (misiles):
 
 def main():
     misiles = list(map(int, input("ingresa los misiles: ").strip().split()))
-    m = LIS(misiles)
-    
-    print(f"Misiles destruidos = {m[1]}")
-    print(f"Misiles  = {m[0]}")
+    m = LIS(misiles)[0]
+    print(LIS(misiles)[0], "misiles destruidos: " )
     return None
 
 

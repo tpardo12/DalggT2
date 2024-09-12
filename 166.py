@@ -1,3 +1,6 @@
+import sys
+
+
 def coinlimited(amount, coins, limits):
     
     
@@ -56,7 +59,7 @@ def coinChange(amount):
 
 
 def coinsf (limits, amount):
-    amount = int(amount *100)
+   
     coins = [5, 10, 20, 50,100,200]
     maxamount = limits[0] * 5 + limits[1]*10 + limits[2]*20 + limits[3]*50 + limits[4]*100 + limits[5]*200
     
@@ -84,19 +87,55 @@ def coinsf (limits, amount):
                min = k
            elif k < min:
                min = k
+    
     return(min)            
 
+def read_input(source):
+    # Función para leer la entrada, ya sea desde un archivo o desde la consola
+    if source:
+        return open(source, 'r')
+    else:
+        return sys.stdin  # Lee desde la consola
+
+def write_output(destination):
+    # Función para escribir la salida, ya sea en archivo o en la consola
+    if destination:
+        return open(destination, 'a')  # Modo 'a' para escribir sin sobreescribir el contenido
+    else:
+        return sys.stdout  # Escribe en la consola
 
 
-def  main( ):
-    a = float(input( "ingresa el valor: "))
-    monedas = list(map(int, input("ingresa las monedas: ").strip().split()))
-    print(coinsf (monedas, a))
-    
+def  main(input_file=None, output_file=None):
+    with read_input(input_file) as infile:
+        outfile = write_output(output_file)  # Mantener outfile abierto todo el tiempo en modo 'a'
+
+        for line in infile:
+            f = list(map(float, line.strip().split()))
+            monedas = list(map(int, f[0:6]))
+            monto = int(f[-1]*100)
+            g = coinsf(monedas, monto)
+            outfile.write(f"{g}\n")
+                
+
+            
+        if outfile == sys.stdout:
+            sys.stdout.flush()
+
+        # Cerrar el archivo de salida si fue un archivo
+        if output_file:
+            outfile.close()
 
 
 if __name__ == "__main__":
-    main()
+    input_file = None
+    output_file = None
+    
+    # Si el usuario pasa argumentos desde la línea de comandos, los utilizamos
+    if len(sys.argv) == 3:
+        input_file = sys.argv[1]
+        output_file = sys.argv[2]
+    
+    main(input_file, output_file)
 
 
 
