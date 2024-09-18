@@ -14,4 +14,84 @@
 6
 7
 7
-8
+8the winning streak is: 2
+
+the winning streak is: 4
+
+the winning streak is: 11
+
+the winning streak is: 3
+
+the winning streak is: 2
+
+the winning streak is: 4
+
+the winning streak is: 11
+
+the winning streak is: 3
+
+the winning streak is: 2
+
+the winning streak is: 4
+
+the winning streak is: 11
+
+the winning streak is: 3
+
+the winning streak is: 2
+the winning streak is: 1
+losing streak
+the winning streak is: 11
+losing streak
+losing streak
+the winning streak is: 2
+the winning streak is: 1
+losing streak
+the winning streak is: 11
+losing streak
+losing streak
+the winning streak is: 2
+the winning streak is: 1
+losing streak
+the winning streak is: 11
+losing streak
+losing streak
+the winning streak is: 2
+the winning streak is: 1
+losing streak
+the winning streak is: 11
+losing streak
+losing streak
+the winning streak is: 2
+the winning streak is: 1
+losing streak
+the winning streak is: 11
+losing streak
+losing streak
+the winning streak is: 2
+the winning streak is: 1
+losing streak
+the winning streak is: 11
+losing streak
+losing streak
+the winning streak is: 2
+the winning streak is: 1
+losing streak
+the winning streak is: 11
+losing streak
+losing streak
+the winning streak is: 2
+the winning streak is: 1
+losing streak
+the winning streak is: 15
+losing streak
+losing streak
+the winning streak is: 6645
+the winning streak is: 4175
+the winning streak is: 4175
+the winning streak is: 4175
+the winning streak is: 4175
+the winning streak is: 4175
+the winning streak is: 4175
+t the winning streak is: 4175
+the winning streak is: 4175
