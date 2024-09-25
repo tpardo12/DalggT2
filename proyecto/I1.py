@@ -4,13 +4,11 @@ from scipy.optimize import linear_sum_assignment  # Solo necesitamos esta parte 
 
 def maximo(m):
     #Personajes de arriba
-    ancho=len(m[0])
     valor=0
     m2=[[0 for _ in range(len(m))] for _ in range(len(m))]
     A=[0 for _ in range(len(m))]
     B=[0 for _ in range(len(m))]
     for i in range(0,len(m)//2+1):
-        
         valor= valor+1
         for a in range(valor):
             if m[i][a]!=-1:
