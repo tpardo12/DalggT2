@@ -18,19 +18,19 @@ def maximo(m):
         for a in range(valor):
             if m[i][a]!=-1:
                 if i !=0:
-                    if a!=(len(m)//2) and i!=len(m)//2:
-                        if a!=(len(m)+valor) and a!=(0):
+                    if i!=len(m)//2:
+                        if (a!=(len(m)+valor)and a!=(largo_fila-1)) and a!=(0):
                             m2[i][a]=max(m2[i-1][a]+m[i][a], m2[i-1][a-1]+m[i][a], m2[i+1][a+1]+m[i][a])
                         elif a==0:
                             m2[i][a]=max(m2[i-1][a]+m[i][a], m2[i-1][a+1]+m[i][a])
-                        elif a==(len(m)+valor):
+                        elif a==(len(m)+valor) or a==largo_fila-1:
                             m2[i][a]=max(m2[i-1][a]+m[i][a], m2[i-1][a-1]+m[i][a])
                     else:
-                        if a!=(len(m)+valor) and a!=(0):
+                        if (a!=(len(m)+valor)and a!=(largo_fila-1)) and a!=(0):
                             A[a]=max(m2[i-1][a]+m[i][a], m2[i-1][a-1]+m[i][a], m2[i+1][a+1]+m[i][a])
                         elif a==0:
                             A[a]=max(m2[i-1][a]+m[i][a], m2[i-1][a+1]+m[i][a])
-                        elif a==(len(m)+valor):
+                        elif a==(len(m)+valor) or a==largo_fila-1:
                             A[a]=max(m2[i-1][a]+m[i][a], m2[i-1][a-1]+m[i][a])
 
             else:
@@ -130,4 +130,13 @@ matriz = [[ 0,  7,  2, -1,  0],
     [-1,  3,  2,  8,  7],
     [ 1,  9,  0,  6,  2]
 ]
+matriz2 = [
+    [0, 9, 1, 0],
+    [-1, 5, 5, 5],
+    [1, 5, 1, 7],
+    [5, 5, 5, 2],
+    [55, 3, 0, 1]
+]
+
+print(maximo(matriz2))
 print(maximo(matriz))
