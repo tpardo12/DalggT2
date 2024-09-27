@@ -1,6 +1,14 @@
-losing streak
-losing streak
-the winning streak is: 17
-the winning streak is: 13
-the winning streak is: 13
-the winning streak is: 19
+68
+53
+
+100
+81
+
+3
+1
+
+59
+56
+
+1
+1

@@ -138,15 +138,12 @@ if __name__ == "__main__":
     input_file = sys.argv[1]
     output_file = sys.argv[2]
     
-    with open(input_file, 'r') as f:
+    with open(input_file, 'r') as f, open(output_file, 'w') as output:
         num_cases = int(f.readline().strip())
-        results = []
         for _ in range(num_cases):
             R, C = map(int, f.readline().strip().split())
             matriz = [list(map(int, f.readline().strip().split())) for _ in range(R)]
             result = max_reliquias(R, C, matriz)
-            results.append(result)
-    
-    with open(output_file, 'w') as f:
-        for result in results:
-            f.write(f"{result}\n")
+            output.write(f"{result}\n")
+            output.flush()  # Ensure the result is written immediately
+

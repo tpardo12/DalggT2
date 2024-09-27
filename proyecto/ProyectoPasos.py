@@ -147,7 +147,7 @@ matriz1 = [
     [-1, 5, 5, 25, 0, 0, 5],
     [1, 5, 1, 5, 7, 0, 1],
     [5, 5, 5, 15, 2,0 , 1],
-    [55, 3, 0, 4, 1,0 ,1 ]
+    [55, 3, 0, 0, 1,0 ,1 ]
 ]
 
 matriz2=[[ 0,  7,  2, -1,  0],
@@ -257,21 +257,21 @@ matriz8=[[ 0,  7,  2, -1,  0],
     [-1,  -1,  -1,  -1,  -1],
     [ 1,  9,  0,  6,  2]]
 
-#resultado1 = max_reliquias(R, 7, matriz1)
-#resultado2 = max_reliquias(21, 5, matriz2)
-#resultado3 = max_reliquias(R, C, matriz3)
-#resultado4 = max_reliquias(7,5,matriz4)
-#resultado5 = max_reliquias(9,7,matriz5)
-#restulado6 = max_reliquias(5,3,matriz6)
+resultado1 = max_reliquias(R, 7, matriz1)
+resultado2 = max_reliquias(21, 5, matriz2)
+resultado3 = max_reliquias(R, C, matriz3)
+resultado4 = max_reliquias(7,5,matriz4)
+resultado5 = max_reliquias(9,7,matriz5)
+restulado6 = max_reliquias(5,3,matriz6)
 resultado7 = max_reliquias(21,3,matriz7)
 resultado8 = max_reliquias(21,5,matriz8)
 
 
-#print(f"Total máximo de reliquias recolectadas en matriz1: {resultado1}")
-#print(f"Total máximo de reliquias recolectadas en matriz2: {resultado2}")
-#print(f"Total máximo de reliquias recolectadas en matriz3: {resultado3}")
-#print(f"Total máximo de reliquias recolectadas en matriz4: {resultado4}")
-#print(f"Total máximo de reliquias recolectadas en matriz4: {resultado5}")
-#print(f"Total máximo de reliquias recolectadas en matriz4: {restulado6}")
+print(f"Total máximo de reliquias recolectadas en matriz1: {resultado1}")
+print(f"Total máximo de reliquias recolectadas en matriz2: {resultado2}")
+print(f"Total máximo de reliquias recolectadas en matriz3: {resultado3}")
+print(f"Total máximo de reliquias recolectadas en matriz4: {resultado4}")
+print(f"Total máximo de reliquias recolectadas en matriz4: {resultado5}")
+print(f"Total máximo de reliquias recolectadas en matriz4: {restulado6}")
 print(f"Total máximo de reliquias recolectadas en matriz4: {resultado7}")
 print(f"Total máximo de reliquias recolectadas en matriz4: {resultado8}")
