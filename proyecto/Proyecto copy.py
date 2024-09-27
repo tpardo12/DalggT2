@@ -168,10 +168,60 @@ matriz3 = [
     [55, 3, 0, 4, 1]
 ]
 
+matriz7=[
+     [ 0,  3,  0],
+    [ 1, -1,  4],
+    [ 2,  6,  8],
+    [-1,  1,  3],
+    [ 9,  2,  5],
+    [ 4,  7, -1],
+    [ 3,  8,  6],
+    [ 1,  9,  2],
+    [ 8,  4,  5],
+    [ 6,  7,  1],
+    [ 2,  3, -1],
+    [ 7,  5,  9],
+    [ 1,  8,  4],
+    [-1,  6,  2],
+    [ 5,  3,  7],
+    [ 9,  1,  8],
+    [ 4,  2,  6],
+    [ 3, -1,  5],
+    [ 6,  8,  1],
+    [ 2,  7,  9],
+    [-1,  0,  4]
+]
+matriz5=[[ 0,  7,  2, -1,  0],
+    [ 6,  1,  8,  9,  3],
+    [-1,  -1,  -1,  -1,  -1],
+    [ 2,  1,  9, -1,  4],
+    [ 5,  6,  3,  8,  7],
+    [ 9,  2,  1,  4, -1],
+    [ 8, -1,  3,  6,  5],
+    [ 4,  7,  2,  1,  9],
+    [ 3,  5,  6,  7,  8],
+    [-1,  1,  2,  3,  4],
+    [ 5,  8,  7, -1,  6],
+    [ 6,  9,  3,  2,  1],
+    [ 7,  4, -1,  5,  8],
+    [ 2,  1,  6,  7,  3],
+    [ 9,  4,  5,  8,  2],
+    [ 8,  3,  2,  1, -1],
+    [ 4,  6,  9,  5,  7],
+    [ 1,  2,  8,  3,  9],
+    [ 5,  6,  4,  9,  1],
+    [-1,  -1,  -1,  -1,  -1],
+    [ 1,  9,  0,  6,  2]]
+
+
 resultado1 = max_reliquias(R, C, matriz1)
 resultado2 = max_reliquias(21, 5, matriz2)
 resultado3 = max_reliquias(R, C, matriz3)
+resultado4 = max_reliquias(21, 3, matriz7)
+resultado5 = max_reliquias(21, 5, matriz5)
 
 print(f"Total máximo de reliquias recolectadas en matriz1: {resultado1}")
 print(f"Total máximo de reliquias recolectadas en matriz3: {resultado2}")
 print(f"Total máximo de reliquias recolectadas en matriz3: {resultado3}")
+print(f"Total máximo de reliquias recolectadas en matriz7: {resultado4}")
+print(f"Total máximo de reliquias recolectadas en matriz5: {resultado5}")
